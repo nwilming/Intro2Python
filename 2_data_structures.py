@@ -36,14 +36,16 @@ alist[::-2]
 alist[::-1]
 
 
-# Lists are references
+# Lists are references / mutable
 
 a = b = [1, 2, 3, 4]
 a.extend([5])
 print(b)
 
-for i in b:
-    print(i)
+# Immutable types do not have this behavior
+a = b = 1
+b = b + 1 # Creates new object.
+print a
 
 
 '''
@@ -57,17 +59,20 @@ b, a = a, b
 for i, elem in enumerate(alist):  # Use enumerate to get counter
     print(i, elem)
 
-# Compare with range:
-range(len(alist))
 
+# Introduce zip 
 
 for index, elem in zip(range(len(alist)), alist):  # Zip two lists together!
     print(index, elem)
+list(zip(range(len(alist)), alist))
+list(zip(alist, alist))
+list(zip(alist[:-1], alist[1:]))
 
 
 from itertools import product
 for a, b in product([1, 2, 3], ['A', 'B', 'D']):  # Flattens nested for loops
     print(a, b)
+
 
 
 '''

@@ -30,6 +30,8 @@ anumber = 11
 
 astring == '101'  # Comparison operator
 
+if astring == '101':
+    print('astring is 101')  # Code block is indented by 4 spaces
 
 if astring == '101':
     print('astring is 101')  # Code block is indented by 4 spaces
@@ -42,6 +44,8 @@ else:
 'Yes' if len(astring) == 10 else 'No'
 
 # No switch / case statement!
+
+
 for i in [1, 2, 3, 4]:  # for loops through any iterable
     print(i)
 
