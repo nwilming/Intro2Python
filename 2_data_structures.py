@@ -44,8 +44,28 @@ print(b)
 
 # Immutable types do not have this behavior
 a = b = 1
-b = b + 1 # Creates new object.
+b = b + 1  # Creates new object.
 print a
+
+# Logical operators:
+a = b = [1, 2, 3, 4]
+a is b
+
+a, b = [1, 2], [1, 2]
+a is b
+
+a = b = 1
+a is b
+
+b = b + 1
+a is b
+
+
+if 1 in [1, 2, 3]:
+    print('1 is in list')
+
+if 5 not in [1, 2, 3]:
+    print('5 is not in list')
 
 
 '''
@@ -60,7 +80,7 @@ for i, elem in enumerate(alist):  # Use enumerate to get counter
     print(i, elem)
 
 
-# Introduce zip 
+# Introduce zip
 
 for index, elem in zip(range(len(alist)), alist):  # Zip two lists together!
     print(index, elem)
@@ -72,7 +92,6 @@ list(zip(alist[:-1], alist[1:]))
 from itertools import product
 for a, b in product([1, 2, 3], ['A', 'B', 'D']):  # Flattens nested for loops
     print(a, b)
-
 
 
 '''
@@ -90,6 +109,7 @@ atuple[1] = -1
 not_a_tuple = (1)
 print(not_a_tuple)
 
+
 '''
 Dictionaries:
 '''
@@ -103,6 +123,7 @@ print(adict)
 adict.update({'un': 'fug', 'baz': 'bar'})
 for key, item in adict.items():
     print(key, item)
+list(adict.items())
 
 for key in adict.keys():
     print(key, adict[key])

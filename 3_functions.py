@@ -43,6 +43,11 @@ print(raise_x(8))
 print(raise_x(8, x=8))  # Overwrite default value
 
 
+def raise_x(exponent=3, x=2):
+    return x**exponent
+print(raise_x(x=7, exponent=8))
+
+
 def foo(*args, **kw):
     print(args)
     print(kw)

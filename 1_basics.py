@@ -43,6 +43,21 @@ else:
 # Ternary if
 'Yes' if len(astring) == 10 else 'No'
 
+
+# Other operators:
+# Comparison operators:
+# <, <=, >, >=, !=, ==
+print(10 != 11)
+
+
+# Logical operators:
+if (astring == '101') or (astring == '102'):
+    print(True)
+
+if (astring == '101') and (astring == '102'):
+    print('impossible')
+
+
 # No switch / case statement!
 
 
