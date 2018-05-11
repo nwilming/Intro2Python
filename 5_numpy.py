@@ -83,7 +83,7 @@ M
 M[1,:] = 0 # also works for rows
 M[:,2] = -1 # and columns
 
-# INDEX SLICING:
+# INDEX SLICING (does not make copy):
 
 v = np.arange(8)
 v
@@ -112,7 +112,7 @@ M[1:3, 1:3] # a block from the original array
 
 M[::2, ::2] # strides
 
-# FANCY INDEXING
+# FANCY INDEXING (makes a copy)
 
 row_indices = [1, 2, 3] # fancy indexing is the name for when an array or list is used in-place of an index:
 M[row_indices]
@@ -124,7 +124,7 @@ mask = np.array([1,0,1,0,0,1,1,0], dtype=bool) # We can also use index masks: If
 mask
 v[mask]
 
-mask = (M>2) & (M < 13) # conditionally select elements from an array, using for example comparison operators
+mask = (M>2) & (M < 13) # conditionally select elements from an array, using for example comparison operators (need the parentheses)
 mask
 M[mask]
 
@@ -132,9 +132,13 @@ indices = np.where(mask) # the index mask can be converted to position index usi
 indices
 M[indices]
 
+'''
+No. 5: Broadcasting rules
 
 '''
-No. 4: Linear algebra
+
+'''
+No. 6: Linear algebra
 '''
 
 # ELEMENT-WISE ARRAY-ARRAY OPERATIONS
@@ -151,7 +155,7 @@ M + M
 M * v # when adding, subtracting, multiplying and dividing arrays with compatible shapes, we get an element-wise multiplication of each row
 M + v
 
-# MATRIX ALGEBRA
+# MATRIX ALGEBRA (in Matlab one needs . for element-wise operations)
 
 np.dot(M, M) # matrix-matrix multiplication
 
@@ -159,19 +163,19 @@ np.dot(M, v) # matrix-vector multiplication
 
 np.dot(v, v) # inner vector multiplication
 
-M = matrix(M) # cast to matrix
-M
-
-v = matrix(v).T # cast to matrix; make it a column vector via transpose
-v
-
-M * M # matrix-matrix multiplication
-
-M * v # matrix-vector multiplication
-
-v.T * v # inner vector multiplication
-
-v * M # if we try to add, subtract or multiply objects with incomplatible shapes we get an error
+# M = matrix(M) # cast to matrix
+# M
+#
+# v = matrix(v).T # cast to matrix; make it a column vector via transpose
+# v
+#
+# M * M # matrix-matrix multiplication
+#
+# M * v # matrix-vector multiplication
+#
+# v.T * v # inner vector multiplication
+#
+# v * M # if we try to add, subtract or multiply objects with incomplatible shapes we get an error
 
 # MATRIX COMPUTATIONS
 
@@ -181,7 +185,7 @@ np.linalg.det(M) # determinant
 
 
 '''
-No. 4: Data processing
+No. 7: Data processing
 '''
 
 M = np.arange(16).reshape((4,4))
@@ -190,7 +194,7 @@ np.mean(M)
 
 M.mean()
 
-np.mean(M, axis=0)
+np.mean(M, axis=0) # can specify several axes
 
 M.mean(axis=0)
 
@@ -216,7 +220,7 @@ np.cumprod(M+1) # cummulative product
 
 
 '''
-No. 5: Reshaping, resizing and stacking arrays
+No. 8: Reshaping, resizing and stacking arrays
 '''
 
 v = array([[1, 2, 3, 4]])
@@ -226,7 +230,8 @@ M = np.arange(16).reshape((4,4))
 n, m = M.shape # make into vector:
 M.reshape((1,n*m))
 
-M.flatten() # make into vector
+M.flatten() # make into vector (again returns a copy)
+M.ravel() # make into vector (does not return a copy)
 
 M.reshape((2,8)) # reshape into 2 rows, 8 columns
 
