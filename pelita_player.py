@@ -6,6 +6,7 @@ from numpy.random import permutation
 import networkx as nx
 import time
 
+from tsp_solver.greedy import solve_tsp
 
 goals = None
 
@@ -38,7 +39,7 @@ class Goals(object):
         self.target_idx = np.arange(len(self.targets))
         self.shortest_tour = self.targets
         self.lowest_cost = 10000000
-        self.opt_tours(30)
+        self.opt_tours(2)
 
     def update(self, bot):
         '''
@@ -77,14 +78,12 @@ class Goals(object):
 
     def opt_tours(self, dt):
         start = time.time()
-        while (start + dt) > time.time():
-            # Sample new tour
-            tour = permutation(np.arange(len(self.target_idx)))
-            cost = self.tour_length(tour)
-            if cost < self.lowest_cost:
-                print(cost)
-                self.lowest_cost = cost
-                self.shortest_tour = [self.targets[t] for t in tour]
+        tour = path = solve_tsp(self.adjacency)
+        cost = self.tour_length(tour)
+        if cost < self.lowest_cost:
+            print(cost)
+            self.lowest_cost = cost
+            self.shortest_tour = [self.targets[t] for t in tour]
 
 
 class Collector(AbstractPlayer):
