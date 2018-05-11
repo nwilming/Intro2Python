@@ -137,6 +137,40 @@ No. 5: Broadcasting rules
 
 '''
 
+# Broadcasting refers to the method that Numpy uses to allow array arithmetic between arrays with a different shape or size.
+
+# scalar and one-dimensional
+a = np.array([1, 2, 3])
+print(a)
+b = 2
+print(b)
+c = a + b
+print(c)
+
+# scalar and two-dimensional
+a = np.array([[1, 2, 3], [1, 2, 3]])
+print(a)
+b = 2
+print(b)
+c = a + b
+print(c)
+
+# one-dimensional and two-dimensional
+a = np.array([[1, 2, 3], [1, 2, 3]])
+print(a)
+b = np.array([1, 2, 3])
+print(b)
+c = a + b
+print(c)
+
+# mismatch:
+a = np.ones((3, 2))
+print(a)
+b = np.arange(3)
+print(b)
+c = a + b
+
+
 '''
 No. 6: Linear algebra
 '''
