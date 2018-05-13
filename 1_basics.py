@@ -6,22 +6,25 @@ Introduction to python: Basic language concepts
 Dynamic typing (types checked on the fly, during execution of commands)
 '''
 
-anumber = 1  # Variable anumber now holds the number 1
-type(anumber)
+# No need to explicitly declare variable types.
+# Instead, Python keeps track of types.
+
+anumber = 1  # Variable anumber holds the number 1
 anumber = anumber + 10
 print(anumber)
 anumber += 10
 print(anumber)
 
-anumber = '231'  # Variable now holds a string!
+astring = '123'  # Variable astring holds a string!
+astring += '123'
+print(astring)
+
+
+print(anumber + astring)  # "Type coersion"; fails because Python is strongly typed.
 type(anumber)
-anumber = anumber + 10  # "type coersion" --> does not work
-
-astring = '123'
-astring = astring + '123'
-
-print(int(astring) + int('123')) # Python is strongly typed, so we need an explicit cast
-print(str(astring) + str('123'))
+type(astring)
+print(anumber + int('123')) # Can make it work, but only with an explicit cast (e.g. int() or str())
+print(str(anumber) + '123')
 
 
 '''
@@ -34,16 +37,21 @@ anumber = 11
 astring == '101'  # Comparison operator
 
 if astring == '101':
-    print('astring is 101')  # Code block is indented by 4 spaces
+    print('astring is 101') # No {} or end statements. Code is grouped by indentation. Use 4 spaces and no tabs.
 
 if astring == '101':
-    print('astring is 101')  # Code block is indented by 4 spaces
+    print('astring is 101')
 elif anumber == 11:
     print('anumber is 11')
 else:
     print('Nah')
 
-# Ternary if (a ? b : c evaluates to b if the value of a is true, and otherwise to c)
+# The elif and else statements are not mandatory.
+# We can have as many elif statements as we want.
+
+# *** The if... elif... elif... sequence is a substitue for the switch / case statement found in some other languages ***
+
+# Ternary if (a ? b : c --> evaluates to b if the value of a is true, and otherwise to c)
 'Yes' if len(astring) == 10 else 'No'
 
 
@@ -57,12 +65,11 @@ print(10 != 11)
 if (astring == '101') or (astring == '102'):
     print(True)
 
+# Parentheses provide confirmation of the developer's intent.
+# Parentheses reduce the work required to understand the code.
+
 if (astring == '101') and (astring == '102'):
     print('impossible')
-
-
-# No switch / case statement!
-
 
 for i in [1, 2, 3, 4]:  # for loops through any iterable
     print(i)
@@ -90,38 +97,81 @@ for j in [1, 2, 3]:  # But does not completely jump put
         print(i)
 
 
-anumber = 100
+anumber = 20
 while anumber > 10:  # Second loop version
-    anumber -= 1
     print(anumber)
+    anumber -= 1
 
+# Python's ultimate error handling goal is to let you know that an error has occurred
+# Having fulfilled its goal, what happens next is all up to you.
+# If you don't specify anything to happen, then a default error message is displayed and the program is ended.
+# You can specify any course of action. E.g., print something, fix the error, etc.
+# This comes in especially handy during debugging.
 
-try:  # Try except catch exceptions
-    foo()
+# For this purpose Python uses the try / except statement:
+# If any code within the try statement causes an error, execution of the code will stop and jump to the except statement.
+
+anumber = 10
+astring = '10'
+
+try:
+    anumber = anumber / astring
+except:
+    print("Something went wrong")
+
+# Let's at least print the error, and double check some things:
+
+try:
+    anumber = anumber / astring
 except Exception as e:
     print(e)
+    print("Something went wrong; printing variable types:")
+    print(type(anumber))
+    print(type(astring))
 
-
-try:
-    anumber = anumber + '10'  # Does not work
-except TypeError as e:
-    print('Cant\'t add number to string')
-    anumber = anumber + 10
+# Now let's just try to fix the error:
 
 try:
-    anumber = anumber + '10'  # Does not work
+    anumber = anumber / astring
+except Exception as e:
+    print(e)
+    print("Let's cast 'astring' to int and try again:")
+    anumber = anumber / int(astring)
+ 
+# Check for a specific type or error:
+ 
+try:
+    anumber = anumber / astring
 except TypeError as e:
-    print("I don't know what to do!")
-    raise(e)
+    print(e)
+    print("Let's cast 'astring' to int and try again:")
+    anumber = anumber / int(astring)
+except:
+    print("This is absurd!!")
 
+astring = 0
+try:
+    anumber = anumber / astring
+except TypeError as e:
+    print(e)
+    print("Let's cast 'astring' to int and try again:")
+    anumber = anumber / int(astring)
+except:
+    print("This is absurd!!")
+
+
+# Add 'finally' statement:
 
 try:
-    anumber = anumber + '10'  # Does not work
+    anumber = anumber / astring
 except TypeError as e:
-    print("I don't know what to do!")
-    raise(e)
-finally:  # Now matter what, always do this
-    print('But let me quickly cleanup')
+    print(e)
+    print("Let's cast 'astring' to int and try again:")
+    anumber = anumber / int(astring)
+except:
+    print("This is absurd!!")
+finally:
+    print("Saving variables...")
 
 
 '''

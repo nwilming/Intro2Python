@@ -74,7 +74,6 @@ def foo(*args, **kwargs):
     print(kwargs)
 foo(1, 2, 3, key1='value', key2='value2')
 
-
 # Do something more fancy: Print a spiral to the console
 # and use two functions for this.
 
