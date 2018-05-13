@@ -71,6 +71,12 @@ if (astring == '101') or (astring == '102'):
 if (astring == '101') and (astring == '102'):
     print('impossible')
 
+
+
+'''
+Loops
+'''
+
 for i in [1, 2, 3, 4]:  # for loops through any iterable
     print(i)
 
@@ -102,6 +108,11 @@ while anumber > 10:  # Second loop version
     print(anumber)
     anumber -= 1
 
+
+'''
+Try / except statements
+'''
+
 # Python's ultimate error handling goal is to let you know that an error has occurred
 # Having fulfilled its goal, what happens next is all up to you.
 # If you don't specify anything to happen, then a default error message is displayed and the program is ended.
@@ -129,7 +140,7 @@ except Exception as e:
     print(type(anumber))
     print(type(astring))
 
-# Now let's just try to fix the error:
+# Now let's try to fix the error:
 
 try:
     anumber = anumber / astring
