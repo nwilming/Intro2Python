@@ -36,28 +36,43 @@ def foo(argument1, argument2):  # Functions can take many input arguments
 print(foo(2, 4))
 
 
-def raise_x(exponent, x=2):
+def raise_x(exponent, x=2): # With one default argument.
     return x**exponent
 
 print(raise_x(8))
 print(raise_x(8, x=8))  # Overwrite default value
-
-
-def raise_x(exponent=3, x=2):
-    return x**exponent
 print(raise_x(x=7, exponent=8))
+print(raise_x(7, 8))
 
 
-def foo(*args, **kw):
+# *args and **kwargs
+def foo(x,y):
+    return x*y
+print(foo(3,4))
+print(foo(3,4,2))
+
+# With *args you can create more flexible code that accepts a varied amount of non-keyworded arguments within your function:
+def foo(*args):
     print(args)
-    print(kw)
-foo(1, 2, 3, key1='value', key2='value2')
+    
+print(foo(3,4,2))
 
+def foo(*args):
+    z = 1
+    for num in args:
+        z *= num
+    return z
+print(foo(3,4,2))
 
-def foo(base, *args):
+def foo(base, *args): # possible to combine normal arguments with *args
     return [base**a for a in args]
 foo(2, 1, 2, 3, 4)
 
+# **kwargs works the same, but now one has to provide keywords.
+def foo(*args, **kwargs):
+    print(args)
+    print(kwargs)
+foo(1, 2, 3, key1='value', key2='value2')
 
 
 # Do something more fancy: Print a spiral to the console
@@ -86,7 +101,8 @@ def print_spiral(nx, ny, dt=0.5, **kw):
                 print('_ ', end='')
         print('')
 
-print_spiral(10, 10, dt=1, beta=1, alpha=0)
+print_spiral(10, 10, dt=1, beta=1, alpha=0,)
+print_spiral(10, 10, dt=1, beta=1, alpha=0, max_dist=2)
 
 
 # Functions are objects

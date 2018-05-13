@@ -3,22 +3,25 @@ Introduction to python: Basic language concepts
 '''
 
 '''
-Dynamic typing
+Dynamic typing (types checked on the fly, during execution of commands)
 '''
 
 anumber = 1  # Variable anumber now holds the number 1
+type(anumber)
 anumber = anumber + 10
 print(anumber)
 anumber += 10
 print(anumber)
 
 anumber = '231'  # Variable now holds a string!
-anumber = anumber + 10  # Does not work
+type(anumber)
+anumber = anumber + 10  # "type coersion" --> does not work
 
 astring = '123'
-astring = astring + '123'  # We need explicit cast, python is dynamic but strongly typed
+astring = astring + '123'
 
-int(astring) + int('123')
+print(int(astring) + int('123')) # Python is strongly typed, so we need an explicit cast
+print(str(astring) + str('123'))
 
 
 '''
@@ -40,7 +43,7 @@ elif anumber == 11:
 else:
     print('Nah')
 
-# Ternary if
+# Ternary if (a ? b : c evaluates to b if the value of a is true, and otherwise to c)
 'Yes' if len(astring) == 10 else 'No'
 
 
@@ -90,7 +93,7 @@ for j in [1, 2, 3]:  # But does not completely jump put
 anumber = 100
 while anumber > 10:  # Second loop version
     anumber -= 1
-print(anumber)
+    print(anumber)
 
 
 try:  # Try except catch exceptions
