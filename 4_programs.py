@@ -14,6 +14,20 @@ from math import sin as sinus, cos
 from math import *  # Behold the star is for gods only.
 # Only acceptable * import is from pylab import *
 
+
+# Make own package!
+# 1. Go to finder -> Desktop
+# 2. Make directory foobar/foobar
+# 3. Create __init__.py
+# 4. import foobar
+# 5. place module inside (create from spiral code)
+# 6. Autoreload
+# 7. import module, print spiral
+# 8. repeat from different directory, fails
+# 9. Create setup.py
+# 10. install with python setup.py develop/install
+
+
 import foobar
 help(foobar)
 
@@ -38,8 +52,8 @@ import sys  # Get command line arguments
 
 import re  # Regular expressions and string pattern matching
 
-import pickle
 
+import pickle
 pickle.dump({'save': 'a dictionary'}, open(
     'tmp.pickle', 'wb'))  # Needs to be binary writing
 print(pickle.load(open('tmp.pickle', 'rb'))
@@ -101,7 +115,7 @@ book=Something('Book')
 read_book = glasses + book
 
 # Other operators: mul, sub, mod, lt, le, eq, ne, gt, ge, getitem, contains,
-# len, str
+# len, str, __call__
 
 
 # Other loose ends:
@@ -144,7 +158,6 @@ with open('test.txt', 'r') as f:  # Context manager will
     for line in f:
         print(line, end='')
 
-# Autoreload
 
 # Generators and yield
 

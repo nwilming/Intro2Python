@@ -42,4 +42,3 @@ def print_distance(func, nx, ny, dt=0.5, **kw):
                 print('_ ', end='')
         print('')
 
-print_distance(spiral_distance

@@ -1,10 +1,6 @@
 from pelita.player import AbstractPlayer, SimpleTeam
-from pelita.datamodel import north, south, west, east, stop
-from pelita.graph import diff_pos, manhattan_dist
 import numpy as np
-from numpy.random import permutation
 import networkx as nx
-import time
 
 from tsp_solver.greedy import solve_tsp
 
@@ -12,17 +8,11 @@ goals = None
 
 
 class Goals(object):
+    '''
+    Represent and coordinate goals for two bots.
+    '''
 
     def __init__(self, bot, maze, universe):
-        # create an empty numpy matrix with the same size as the maze
-        #walls_np = np.zeros(shape=(maze.width, maze.height), dtype=bool)
-
-        # maze items iterates over the position and the value at this position
-        # for (i, j), v in maze.items():
-        #    walls_np[i, j] = v
-        #self.walls = walls_np
-        #self.value = 0 * walls_np.astype(int)
-
         self.graph = nx.Graph()
         # now iterate over all free positions
         for pos, neighbors in universe.free_positions():
@@ -44,13 +34,13 @@ class Goals(object):
     def update(self, bot):
         '''
         Compute a new move for this bot.
-        '''       
-        enemy_pos = [e.current_pos for e in bot.enemy_bots] 
+        '''
+        enemy_pos = [e.current_pos for e in bot.enemy_bots]
         try:
             if bot.me.index == 0:
                 target = self.shortest_tour[0]
             else:
-                target = self.shortest_tour[-1]        
+                target = self.shortest_tour[-1]
             path = nx.shortest_path(self.graph, bot.current_pos, target)
             legal_moves = bot.legal_moves
             pos = path[1]
@@ -71,14 +61,19 @@ class Goals(object):
             return bot.rnd.choice(list(legal_moves.keys()))
 
     def tour_length(self, tour):
+        '''
+        Compute the length of a tour
+        '''
         cost = 0
         for start, end in zip(tour[0:-1], tour[1:]):
             cost += self.adjacency[start, end]
         return cost
 
     def opt_tours(self, dt):
-        start = time.time()
-        tour = path = solve_tsp(self.adjacency)
+        '''
+        Generate optimal tour.
+        '''
+        tour = solve_tsp(self.adjacency)
         cost = self.tour_length(tour)
         if cost < self.lowest_cost:
             print(cost)
@@ -87,41 +82,19 @@ class Goals(object):
 
 
 class Collector(AbstractPlayer):
-    """ 
+    """
     A Player aims to collect as much as possible. It
     coordinates with other Collector players.
     """
 
     def set_initial(self):
-
         global goals
         if goals is None:
             goals = Goals(self, self.current_uni.maze, self.current_uni)
 
-    def get_move(self):
-        # goals.opt_tours(0.25)
+    def get_move(self):        
         return goals.update(self)
 
 
 def team():
     return SimpleTeam("CollectorZ", Collector(), Collector())
-
-
-'''
-    target = np.unravel_index(target, self.value.shape)
-        path = nx.shortest_path(self.graph, self.current_pos, target)
-        legal_moves = self.legal_moves
-        try:
-            pos = path[1]
-            pos2move = dict((v, k) for k, v in legal_moves.items())
-            move = pos2move[pos]
-            self.value = 0 * self.walls.astype(int)
-            for (i, j) in self.enemy_food:
-                if (i, j) == pos:
-                    continue
-                self.value[i, j] = 5
-            return move
-        except (KeyError, IndexError):
-            print('RANDOM')
-            return self.rnd.choice(list(legal_moves.keys()))
-'''
