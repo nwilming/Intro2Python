@@ -10,21 +10,20 @@ Dynamic typing (types checked on the fly, during execution of commands)
 # Instead, Python keeps track of types.
 
 anumber = 1  # Variable anumber holds the number 1
+type(anumber) # Which Python correctly interpreted as an integer
 anumber = anumber + 10
 print(anumber)
 anumber += 10
 print(anumber)
 
 astring = '123'  # Variable astring holds a string!
-astring += '123'
+type(astring)
+astring += '456'
 print(astring)
 
-
 print(anumber + astring)  # "Type coersion"; fails because Python is strongly typed.
-type(anumber)
-type(astring)
 print(anumber + int('123')) # Can make it work, but only with an explicit cast (e.g. int() or str())
-print(str(anumber) + '123')
+print(str(anumber) + '123') # ** explicit is better than implicit **
 
 
 '''
@@ -34,10 +33,12 @@ astring = '101'
 anumber = 11
 
 
-astring == '101'  # Comparison operator
+astring == '101'  # Comparison operator to check if something is True (or False)
+
+# We can use that conditionally execute a block of code
 
 if astring == '101':
-    print('astring is 101') # No {} or end statements. Code is grouped by indentation. Use 4 spaces and no tabs.
+    print('astring is 101') # No {} or end statements. Code is grouped by indentation. Use 4 spaces and no tabs. ** readability counts! **
 
 if astring == '101':
     print('astring is 101')
@@ -92,9 +93,9 @@ for i in 'onetwothree':  # continue skips an iteration
     print(i)
 
 for i in 'onetwothree':  # break terminates the inner most loop
-    print(i)
     if i == 't':
         break
+    print(i)
 
 for j in [1, 2, 3]:  # But does not completely jump put
     for i in 'onetwothree':
@@ -102,16 +103,22 @@ for j in [1, 2, 3]:  # But does not completely jump put
             break
         print(i)
 
+for i, j in enumerate([1, 2, 3, 4]):  # enumerate gives (i) iterator for index and (ii) value of iterable
+    print(i)
+    # print(j)
 
 anumber = 20
 while anumber > 10:  # Second loop version
     print(anumber)
-    anumber -= 1
+    anumber -= 0.5
 
 
 '''
 Try / except statements
 '''
+
+# ** Errors should never pass silently. **
+# ** Unless explicitly silenced. **
 
 # Python's ultimate error handling goal is to let you know that an error has occurred
 # Having fulfilled its goal, what happens next is all up to you.
