@@ -33,6 +33,7 @@ class Collector(AbstractPlayer):
         '''
         Compute a new move for this bot.
         '''
+        #import ipdb; ipdb.set_trace()
         enemy_pos = [e.current_pos for e in self.enemy_bots]
         try:
             index = 0 if self.me.index == 0 else -1
