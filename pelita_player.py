@@ -4,6 +4,7 @@ import networkx as nx
 
 from tsp_solver.greedy import solve_tsp
 
+# Call like this: pelita /path/pelita_player.py:team1 /path/pelita_player.py:team2
 
 class Collector(AbstractPlayer):
     """
