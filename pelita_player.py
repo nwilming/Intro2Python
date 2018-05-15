@@ -4,7 +4,8 @@ import networkx as nx
 
 from tsp_solver.greedy import solve_tsp
 
-# Call like this: pelita /path/pelita_player.py:team1 /path/pelita_player.py:team2
+# Call: pelita /path/pelita_player.py:team1 /path/pelita_player.py:team2
+
 
 class Collector(AbstractPlayer):
     """
@@ -44,7 +45,7 @@ class Collector(AbstractPlayer):
             path = nx.shortest_path(self.graph, self.current_pos, target)
             # Translate next position in path to target to a move
             pos = path[1]
-            pos2move = dict((v, k) for k, v in self.legal_moves.items())
+            pos2move = {v: k for k, v in self.legal_moves.items()}
             move = pos2move[pos]
 
             if pos in enemy_pos:
