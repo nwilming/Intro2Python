@@ -91,9 +91,9 @@ class Collector(AbstractPlayer):
         self.shortest_tour = [self.enemy_food[t] for t in tour]
 
 
-def team1():
+def factory():
     return SimpleTeam("CollectorZ", Collector(), Collector())
 
 
-def team2():
+def factory2():
     return SimpleTeam("KolleKtorZ", Collector(), Collector())
