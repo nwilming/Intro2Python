@@ -36,14 +36,14 @@ def prisonser(N=100):
     beenthere = [False for _ in range(N)]
     light = False  # the light is turned off at t=0
 
-    while (counts < N - 1):
+    while (counts < (N - 1)):
         turns += 1
         prisoner = choice(range(N))  # choose a prisoner
         if prisoner != counter_ID:
             if beenthere[prisoner] is False:
                 if light is False:
                     light = True
-                    beenthere[prisoner] = 1
+                    beenthere[prisoner] = True
         if prisoner == counter_ID:
             if light is True:
                 light = False
