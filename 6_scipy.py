@@ -83,6 +83,10 @@ title('Fourier transform')
 xlabel('Frequency (s)')
 ylabel('Amplitude (Hz)')
 
+# Window functions:
+from scipy.signal import blackman
+w = blackman(N)
+yf_window = fft(w*y)
 
 '''
 No. 4: Statistics
