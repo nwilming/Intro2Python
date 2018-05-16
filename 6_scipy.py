@@ -84,9 +84,10 @@ xlabel('Frequency (s)')
 ylabel('Amplitude (Hz)')
 
 # Window functions:
-from scipy.signal import blackman
+from scipy.signal import blackman, hann
 w = blackman(N)
 yf_window = fft(w*y)
+yf_hann = fft(hann(N)*y)
 
 '''
 No. 4: Statistics
